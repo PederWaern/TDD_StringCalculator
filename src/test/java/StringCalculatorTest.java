@@ -27,4 +27,15 @@ public class StringCalculatorTest {
 		public void ifNumbersIsTwoThenReturnTwo() throws Exception {
 				assertThat(actual.add("2"), is(2));
 		}
+
+		@Test
+		public void canHandleSeveralNumbersSeparatedByComma() throws Exception {
+				assertThat(actual.add("1,2"), is(3));
+				assertThat(actual.add("1,2,2,3"), is(8));
+		}
+
+		@Test (expected = IllegalArgumentException.class)
+		public void nonNumberCharachterThrowsException() throws Exception {
+				actual.add("1,2,X");
+		}
 }
