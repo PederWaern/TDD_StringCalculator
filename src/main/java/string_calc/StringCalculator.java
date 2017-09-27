@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
-	private static int CUSTOM_DELIMETER_INDEX = 2;
-	private static String CUSTOM_DELIMITER_PATTERNSTART = "//";
-	private static String DEFAULT_DELIMITER = ",";
-	private static int CUSTOM_DELIMITER_PATTERNEND_INDEX = 4;
+	private static final int CUSTOM_DELIMETER_INDEX = 2;
+	private static final String CUSTOM_DELIMITER_PATTERNSTART = "//";
+	private static final String DEFAULT_DELIMITER = ",";
+	private static final int CUSTOM_DELIMITER_PATTERNEND_INDEX = 4;
 	private static final int MIN_CUSTOM_DELIMITER_INPUT_LENGTH = 5;
 
 	private List<Integer> positiveNumbers;
@@ -24,7 +24,8 @@ public class StringCalculator {
 		}
 
 		boolean hasValidCustomDelimiterPatternStart = numbers.length() > MIN_CUSTOM_DELIMITER_INPUT_LENGTH
-																													&& removeCustomDelimiterPatternStart(numbers, 0, 2).equals(CUSTOM_DELIMITER_PATTERNSTART);
+																													&& removeCustomDelimiterPatternStart(numbers, 0, 2).equals
+																																																											(CUSTOM_DELIMITER_PATTERNSTART);
 		if (hasValidCustomDelimiterPatternStart) {
 			delimiter = parseCustomDelimiter(numbers);
 			numbers = removeCustomDelimiterPatternStart(numbers, CUSTOM_DELIMITER_PATTERNEND_INDEX, numbers.length());
@@ -40,18 +41,15 @@ public class StringCalculator {
 			throwNegativeNumberException();
 		}
 
-		return positiveNumbers
-									 .stream()
+		return positiveNumbers.stream()
 									 .mapToInt(num -> num)
 									 .sum();
 	}
 
 	private void throwNegativeNumberException() {
-		throw new NegativeNumberException("Invalid input: "
-																							+ negativeNumbers
-																												.stream()
-																												.map(num -> Integer.toString(num))
-																												.collect(Collectors.joining(",")));
+		throw new NegativeNumberException("Invalid input: " + negativeNumbers.stream()
+																																	.map(num -> Integer.toString(num))
+																																	.collect(Collectors.joining(",")));
 	}
 
 	private List<Integer> getNumbersBasedOnPredicate(Predicate<Integer> predicate) {
