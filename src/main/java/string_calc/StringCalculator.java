@@ -22,12 +22,13 @@ public class StringCalculator {
 		if (numbers.isEmpty() || numbers == null) {
 			return 0;
 		}
-
-		boolean hasValidCustomDelimiterPatternStart = numbers.length() > MIN_CUSTOM_DELIMITER_INPUT_LENGTH
-																													&& removeCustomDelimiterPatternStart(numbers, 0, 2).equals(CUSTOM_DELIMITER_PATTERNSTART);
+		boolean hasValidCustomDelimiterPatternStart = 
+			numbers.length() > MIN_CUSTOM_DELIMITER_INPUT_LENGTH
+		        && removeCustomDelimiterPatternStart(numbers, 0, 2).equals(CUSTOM_DELIMITER_PATTERNSTART);
 		if (hasValidCustomDelimiterPatternStart) {
 			delimiter = parseCustomDelimiter(numbers);
-			numbers = removeCustomDelimiterPatternStart(numbers, CUSTOM_DELIMITER_PATTERNEND_INDEX, numbers.length());
+			numbers = removeCustomDelimiterPatternStart(numbers, CUSTOM_DELIMITER_PATTERNEND_INDEX,
+								    numbers.length());
 		} else {
 			delimiter = DEFAULT_DELIMITER;
 		}
@@ -41,14 +42,15 @@ public class StringCalculator {
 		}
 
 		return positiveNumbers.stream()
-									 .mapToInt(num -> num)
-									 .sum();
+				.mapToInt(num -> num)
+				.sum();
 	}
 
 	private void throwNegativeNumberException() {
-		throw new NegativeNumberException("Invalid input: " + negativeNumbers.stream()
-																				.map(num -> Integer.toString(num))
-																				.collect(Collectors.joining(",")));
+		throw new NegativeNumberException("Invalid input: " + negativeNumbers
+						  .stream()
+						  .map(num -> Integer.toString(num))
+						  .collect(Collectors.joining(",")));
 	}
 
 	private List<Integer> getNumbersBasedOnPredicate(Predicate<Integer> predicate) {
