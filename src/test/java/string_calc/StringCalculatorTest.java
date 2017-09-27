@@ -1,3 +1,5 @@
+package string_calc;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,5 +50,15 @@ public class StringCalculatorTest {
 		public void supportCustomDelimeter() throws Exception {
 				assertThat(actual.add("//;\n1;2"), is(3));
 				assertThat(actual.add("//!\n1!2!3"), is(6));
+		}
+
+		@Test (expected = NegativeNumberException.class)
+		public void oneNegativeNumberThrowsException() throws Exception {
+				actual.add("1,2,-2,3");
+		}
+
+		@Test (expected = NegativeNumberException.class)
+		public void severalNegativeNumbersThrowsException() throws Exception {
+				actual.add("1,-2,-2,3,5,-34");
 		}
 }
