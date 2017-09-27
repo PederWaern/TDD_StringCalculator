@@ -38,4 +38,9 @@ public class StringCalculatorTest {
 		public void nonNumberCharachterThrowsException() throws Exception {
 				actual.add("1,2,X");
 		}
+
+		@Test
+		public void newLineSeparatorGetTreatedAsCommaSeparator() throws Exception {
+				assertThat(actual.add("1\n2,3"), is(6));
+		}
 }
