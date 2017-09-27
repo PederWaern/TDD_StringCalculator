@@ -24,8 +24,7 @@ public class StringCalculator {
 		}
 
 		boolean hasValidCustomDelimiterPatternStart = numbers.length() > MIN_CUSTOM_DELIMITER_INPUT_LENGTH
-																													&& removeCustomDelimiterPatternStart(numbers, 0, 2).equals
-																																																											(CUSTOM_DELIMITER_PATTERNSTART);
+																													&& removeCustomDelimiterPatternStart(numbers, 0, 2).equals(CUSTOM_DELIMITER_PATTERNSTART);
 		if (hasValidCustomDelimiterPatternStart) {
 			delimiter = parseCustomDelimiter(numbers);
 			numbers = removeCustomDelimiterPatternStart(numbers, CUSTOM_DELIMITER_PATTERNEND_INDEX, numbers.length());
@@ -48,16 +47,16 @@ public class StringCalculator {
 
 	private void throwNegativeNumberException() {
 		throw new NegativeNumberException("Invalid input: " + negativeNumbers.stream()
-																																	.map(num -> Integer.toString(num))
-																																	.collect(Collectors.joining(",")));
+																				.map(num -> Integer.toString(num))
+																				.collect(Collectors.joining(",")));
 	}
 
 	private List<Integer> getNumbersBasedOnPredicate(Predicate<Integer> predicate) {
 		return Arrays.stream(numbersWithNewLineReplaced.split(delimiter))
-									 .mapToInt(Integer::parseInt)
-									 .boxed()
-									 .filter(predicate)
-									 .collect(Collectors.toList());
+							 .mapToInt(Integer::parseInt)
+							 .boxed()
+							 .filter(predicate)
+							 .collect(Collectors.toList());
 
 	}
 
